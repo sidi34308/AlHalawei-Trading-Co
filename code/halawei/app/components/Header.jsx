@@ -114,7 +114,7 @@ export default function Header({ language = "en" }) {
       >
         <div className="flex flex-col space-y-4 p-4 mt-16">
           <NavLink
-            href={getLocalizedPath("/")}
+            href={getLocalizedPath("/home")}
             onClick={() => setIsOpen(false)}
           >
             {language === "ar" ? "الرئيسية" : "Home"}

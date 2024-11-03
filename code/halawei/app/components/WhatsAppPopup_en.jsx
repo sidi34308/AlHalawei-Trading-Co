@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react"; // Import close icon
+import { FaWhatsapp } from "react-icons/fa"; // Import WhatsApp icon
 
 export default function WhatsAppPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,8 +27,9 @@ export default function WhatsAppPopup() {
         }`}
       >
         <div className="flex justify-between items-center mb-2">
-          <p className="text-lg font-semibold">
-            💬 <strong>Contact us via WhatsApp</strong>
+          <p className="text-lg font-semibold flex items-center">
+            <FaWhatsapp className="w-6 h-6 mr-2" /> {/* WhatsApp icon */}
+            <strong>Contact us via WhatsApp</strong>
           </p>
           <button
             onClick={handleClose}

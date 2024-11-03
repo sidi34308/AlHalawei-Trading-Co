@@ -6,7 +6,10 @@ export default function About() {
     <>
       <Header language="ar" />
       <div className="bg-black w-full h-40"></div>
-      <section className=" mx-auto py-16 px-6">
+      <section
+        className=" mx-auto py-16 px-6"
+        style={{ direction: "rtl" }} // Ensure RTL text flow
+      >
         <h2 className="text-4xl font-bold text-center text-primary mb-8">
           من نحن
         </h2>

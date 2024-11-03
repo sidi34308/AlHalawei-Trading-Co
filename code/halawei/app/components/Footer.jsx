@@ -16,7 +16,7 @@ export default function Footer({ language = "en" }) {
   return (
     <footer
       className="bg-primary text-white py-8 px-9 sm:px-40"
-      style={{ direction: language === "ar" ? "rtl" : "ltr" }}
+      style={{ direction: "ltr" }}
     >
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* Company Information */}
@@ -24,7 +24,7 @@ export default function Footer({ language = "en" }) {
           <h4 className="text-xl font-bold mb-4">
             {language === "ar" ? "الحلاوي للتجارة" : "Al Halawei Trading"}
           </h4>
-          <p>
+          <p style={{ direction: language === "ar" ? "rtl" : "ltr" }}>
             {language === "ar"
               ? "نقدم مجموعة واسعة من المنتجات والخدمات عالية الجودة في قطر."
               : "We offer a wide range of high-quality products and services in Qatar."}

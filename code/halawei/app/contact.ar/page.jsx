@@ -42,7 +42,7 @@ export default function Contact() {
         </div>
         <div className="mt-8">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3625.2920990897693!2d51.53222731500206!3d25.26757843464286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45dfc4ed87e919%3A0xa50328d6069cbb6a!2sIndustrial%20Area%2043rd%20St!5e0!3m2!1sen!2sqa!4v1617752726311!5m2!1sen!2sqa"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7221.851803474512!2d51.444707901327526!3d25.171979719614416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45d14d48195edd%3A0xbb1021e61b5ff09f!2z2LTYp9ix2LkgNDM!5e0!3m2!1sar!2sqa!4v1730659955317!5m2!1sar!2sqa"
             width="100%"
             height="500"
             allowFullScreen=""
