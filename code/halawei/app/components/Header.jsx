@@ -3,32 +3,49 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation"; // Use navigation router for App Router
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
 
+  // Detect scroll to add background color
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) setIsOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
+  // Function to toggle between Arabic and English
+  const toggleLanguage = () => {
+    const newPath = window.location.pathname.endsWith(".ar")
+      ? window.location.pathname.replace(".ar", "")
+      : `${window.location.pathname}.ar`;
+    window.location.href = newPath;
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-colors duration-300 p-4 px-9 sm:px-40  z-50 ${
+      className={`fixed top-0 left-0 right-0 transition-colors duration-300 p-4 px-9 sm:px-40 z-50 ${
         isScrolled ? "bg-black" : "bg-transparent"
       }`}
       style={{ direction: "ltr" }}
     >
       <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
         <h1 className="text-2xl font-bold">
           <Link href="/" className="hover:opacity-80 transition-opacity">
             <Image
@@ -40,11 +57,21 @@ export default function Header() {
             />
           </Link>
         </h1>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-4">
           <NavLink href="/">الرئيسية</NavLink>
           <NavLink href="/about">من نحن</NavLink>
           <NavLink href="/contact">تواصل معنا</NavLink>
+          <button
+            onClick={toggleLanguage}
+            className="ml-4 px-3 py-1 border border-white rounded text-white"
+          >
+            {router.locale === "en" ? "العربية" : "English"}
+          </button>
         </nav>
+
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden focus:outline-none text-white"
           onClick={() => setIsOpen(!isOpen)}
@@ -67,7 +94,8 @@ export default function Header() {
           </svg>
         </button>
       </div>
-      {/* Mobile menu */}
+
+      {/* Mobile Navigation Menu */}
       <div
         className={`md:hidden fixed inset-y-0 right-0 transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -86,9 +114,19 @@ export default function Header() {
           <NavLink href="/contact" onClick={() => setIsOpen(false)}>
             تواصل معنا
           </NavLink>
+          <button
+            onClick={() => {
+              toggleLanguage();
+              setIsOpen(false);
+            }}
+            className="px-3 py-2 mt-4 border border-white rounded text-white"
+          >
+            {router.locale === "en" ? "العربية" : "English"}
+          </button>
         </div>
       </div>
-      {/* Overlay */}
+
+      {/* Overlay for Mobile Menu */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
@@ -99,6 +137,7 @@ export default function Header() {
   );
 }
 
+// NavLink component with hover effect
 function NavLink({ href, children, ...props }) {
   return (
     <Link
