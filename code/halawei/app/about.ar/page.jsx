@@ -4,7 +4,7 @@ import Header from "../components/Header";
 export default function About() {
   return (
     <>
-      <Header />
+      <Header language="ar" />
       <div className="bg-black w-full h-40"></div>
       <section className=" mx-auto py-16 px-6">
         <h2 className="text-4xl font-bold text-center text-primary mb-8">
@@ -54,7 +54,7 @@ export default function About() {
         </div>
       </section>
 
-      <Footer />
+      <Footer language="ar" />
     </>
   );
 }

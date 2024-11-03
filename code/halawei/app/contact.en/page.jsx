@@ -1,42 +1,40 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+
 export default function Contact() {
   return (
     <>
-      <Header />
+      <Header language="en" />
       <div className="w-full h-40 bg-black"></div>
-      <section
-        className=" mx-auto py-16 "
-        style={{ direction: "rtl" }} // Ensure RTL text flow
-      >
+      <section className="mx-auto py-16" style={{ direction: "ltr" }}>
         <h2 className="text-4xl font-bold text-center text-primary mb-8">
-          تواصل معنا
+          Contact Us
         </h2>
-        <div className=" grid px-9 sm:px-40 grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid px-9 sm:px-40 grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <p className="text-lg">
-              العنوان: المنطقة الصناعية، شارع 43، الدوحة، قطر
+              Address: Industrial Area, Street 43, Doha, Qatar
             </p>
-            <p className="text-lg">الهاتف: +974 55570274</p>
-            <p className="text-lg">البريد الإلكتروني: info@alhalawei.com</p>
+            <p className="text-lg">Phone: +974 55570274</p>
+            <p className="text-lg">Email: info@alhalawei.com</p>
           </div>
           <form className="space-y-4">
             <input
               type="text"
-              placeholder="الاسم"
+              placeholder="Name"
               className="w-full p-2 border rounded"
             />
             <input
               type="email"
-              placeholder="البريد الإلكتروني"
+              placeholder="Email"
               className="w-full p-2 border rounded"
             />
             <textarea
-              placeholder="رسالتك"
+              placeholder="Your Message"
               className="w-full p-2 border rounded"
               rows="4"
             ></textarea>
-            <button className="bg-primary text-white p-2 rounded">إرسال</button>
+            <button className="bg-primary text-white p-2 rounded">Send</button>
           </form>
         </div>
         <div className="mt-8">
@@ -50,7 +48,7 @@ export default function Contact() {
           ></iframe>
         </div>
       </section>
-      <Footer />
+      <Footer language="en" />
     </>
   );
 }

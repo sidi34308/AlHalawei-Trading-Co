@@ -3,19 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // Use navigation router for App Router
 
-export default function Header() {
+export default function Header({ language = "en" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
 
   // Detect scroll to add background color
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,13 +26,18 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Function to toggle between Arabic and English
+  // Toggle language based on the current page version
   const toggleLanguage = () => {
-    const newPath = window.location.pathname.endsWith(".ar")
-      ? window.location.pathname.replace(".ar", "")
-      : `${window.location.pathname}.ar`;
+    const currentPath = window.location.pathname;
+    const newPath = currentPath.endsWith(".ar")
+      ? currentPath.replace(".ar", ".en")
+      : currentPath.replace(".en", ".ar");
     window.location.href = newPath;
   };
+
+  // Generate the correct link path based on language
+  const getLocalizedPath = (path) =>
+    `${path}${language === "ar" ? ".ar" : ".en"}`;
 
   return (
     <header
@@ -47,7 +49,10 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-2xl font-bold">
-          <Link href="/" className="hover:opacity-80 transition-opacity">
+          <Link
+            href={getLocalizedPath("/home")}
+            className="hover:opacity-80 transition-opacity"
+          >
             <Image
               src="/logo.png"
               alt="Logo"
@@ -60,14 +65,20 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-4">
-          <NavLink href="/">الرئيسية</NavLink>
-          <NavLink href="/about">من نحن</NavLink>
-          <NavLink href="/contact">تواصل معنا</NavLink>
+          <NavLink href={getLocalizedPath("/home")}>
+            {language === "ar" ? "الرئيسية" : "Home"}
+          </NavLink>
+          <NavLink href={getLocalizedPath("/about")}>
+            {language === "ar" ? "من نحن" : "About Us"}
+          </NavLink>
+          <NavLink href={getLocalizedPath("/contact")}>
+            {language === "ar" ? "تواصل معنا" : "Contact"}
+          </NavLink>
           <button
             onClick={toggleLanguage}
             className="ml-4 px-3 py-1 border border-white rounded text-white"
           >
-            {router.locale === "en" ? "العربية" : "English"}
+            {language === "en" ? "العربية" : "English"}
           </button>
         </nav>
 
@@ -101,18 +112,24 @@ export default function Header() {
           isOpen ? "translate-x-0" : "translate-x-full"
         } w-64 bg-black shadow-lg transition-transform duration-300 ease-in-out z-20`}
       >
-        <div
-          className="flex flex-col space-y-4 p-4 mt-16"
-          style={{ direction: "rtl" }}
-        >
-          <NavLink href="/" onClick={() => setIsOpen(false)}>
-            الرئيسية
+        <div className="flex flex-col space-y-4 p-4 mt-16">
+          <NavLink
+            href={getLocalizedPath("/")}
+            onClick={() => setIsOpen(false)}
+          >
+            {language === "ar" ? "الرئيسية" : "Home"}
           </NavLink>
-          <NavLink href="/about" onClick={() => setIsOpen(false)}>
-            من نحن
+          <NavLink
+            href={getLocalizedPath("/about")}
+            onClick={() => setIsOpen(false)}
+          >
+            {language === "ar" ? "من نحن" : "About Us"}
           </NavLink>
-          <NavLink href="/contact" onClick={() => setIsOpen(false)}>
-            تواصل معنا
+          <NavLink
+            href={getLocalizedPath("/contact")}
+            onClick={() => setIsOpen(false)}
+          >
+            {language === "ar" ? "تواصل معنا" : "Contact"}
           </NavLink>
           <button
             onClick={() => {
@@ -121,7 +138,7 @@ export default function Header() {
             }}
             className="px-3 py-2 mt-4 border border-white rounded text-white"
           >
-            {router.locale === "en" ? "العربية" : "English"}
+            {language === "en" ? "العربية" : "English"}
           </button>
         </div>
       </div>
