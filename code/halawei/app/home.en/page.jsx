@@ -42,7 +42,7 @@ export default function Home() {
             Al Halawei Trading was established in Qatar, committed to providing
             a variety of products and services including food items, electronic
             devices, mobile accessories, and building materials. We offer
-            solutions that meet the local market's needs with a focus on
+            solutions that meet the local market&#39;s needs with a focus on
             quality.
           </p>
         </section>
