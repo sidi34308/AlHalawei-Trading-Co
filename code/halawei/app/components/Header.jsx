@@ -1,15 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+
+const NavLink = ({ href, children, onClick }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      href={href}
+      className={`text-sm font-medium transition-colors hover:text-white ${
+        isActive ? "text-white" : "text-white/60"
+      }`}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+};
 
 export default function Header({ language = "en" }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
 
-  // Track scroll direction and hide/show header
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -20,20 +39,24 @@ export default function Header({ language = "en" }) {
       lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on Escape key press
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape" && isOpen) setIsOpen(false);
+    const handleClickOutside = (event) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
 
-  // Toggle language based on the current page version
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const toggleLanguage = () => {
     const currentPath = window.location.pathname;
     const newPath = currentPath.endsWith(".ar")
@@ -42,134 +65,138 @@ export default function Header({ language = "en" }) {
     window.location.href = newPath;
   };
 
-  // Generate the correct link path based on language
   const getLocalizedPath = (path) =>
     `${path}${language === "ar" ? ".ar" : ".en"}`;
 
+  const navItems = [
+    {
+      href: getLocalizedPath("/home"),
+      label: language === "ar" ? "الرئيسية" : "Home",
+    },
+    {
+      href: getLocalizedPath("/about"),
+      label: language === "ar" ? "من نحن" : "About Us",
+    },
+    {
+      href: getLocalizedPath("/contact"),
+      label: language === "ar" ? "تواصل معنا" : "Contact",
+    },
+  ];
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-transform duration-300 p-4 px-9 sm:px-40 z-50 ${
-        isScrolled ? "bg-black" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 px-40 py-4 z-50 ${
+        isScrolled
+          ? "bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/85"
+          : "bg-transparent"
       } ${isHidden ? "-translate-y-full" : "translate-y-0"}`}
       style={{ direction: "ltr" }}
     >
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <h1 className="text-2xl font-bold">
-          <Link
-            href={getLocalizedPath("/home")}
-            className="hover:opacity-80 transition-opacity"
-          >
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={176}
-              height={40}
-              className="w-44"
-            />
-          </Link>
-        </h1>
+      <div className="container mx-auto flex items-center justify-between">
+        <Link
+          href={getLocalizedPath("/home")}
+          className="flex items-center space-x-2"
+        >
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={176}
+            height={40}
+            className="w-44"
+          />
+          <span className="sr-only">Home</span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-4">
-          <NavLink href={getLocalizedPath("/home")}>
-            {language === "ar" ? "الرئيسية" : "Home"}
-          </NavLink>
-          <NavLink href={getLocalizedPath("/about")}>
-            {language === "ar" ? "من نحن" : "About Us"}
-          </NavLink>
-          <NavLink href={getLocalizedPath("/contact")}>
-            {language === "ar" ? "تواصل معنا" : "Contact"}
-          </NavLink>
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+          {navItems.map((item) => (
+            <NavLink key={item.href} href={item.href}>
+              {item.label}
+            </NavLink>
+          ))}
           <button
             onClick={toggleLanguage}
-            className="ml-4 px-3 py-1 border border-white rounded text-white"
+            className="px-4 py-2 text-sm font-medium text-white bg-transparent border border-white rounded-md hover:bg-white hover:text-black transition-colors"
           >
             {language === "en" ? "العربية" : "English"}
           </button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden focus:outline-none text-white"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {isOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile Navigation Menu */}
-      <div
-        className={`md:hidden fixed inset-y-0 right-0 transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } w-64 bg-black shadow-lg transition-transform duration-300 ease-in-out z-20`}
-      >
-        <div className="flex flex-col space-y-4 p-4 mt-16">
-          <NavLink
-            href={getLocalizedPath("/home")}
-            onClick={() => setIsOpen(false)}
-          >
-            {language === "ar" ? "الرئيسية" : "Home"}
-          </NavLink>
-          <NavLink
-            href={getLocalizedPath("/about")}
-            onClick={() => setIsOpen(false)}
-          >
-            {language === "ar" ? "من نحن" : "About Us"}
-          </NavLink>
-          <NavLink
-            href={getLocalizedPath("/contact")}
-            onClick={() => setIsOpen(false)}
-          >
-            {language === "ar" ? "تواصل معنا" : "Contact"}
-          </NavLink>
+        <div className="md:hidden">
           <button
-            onClick={() => {
-              toggleLanguage();
-              setIsOpen(false);
-            }}
-            className="px-3 py-2 mt-4 border border-white rounded text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-white focus:outline-none"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
           >
-            {language === "en" ? "العربية" : "English"}
+            <motion.svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              animate={isMobileMenuOpen ? "open" : "closed"}
+              initial="closed"
+            >
+              <motion.path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                variants={{
+                  closed: { d: "M4 6h16M4 12h16M4 18h16" },
+                  open: { d: "M6 18L18 6M6 6l12 12" },
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.svg>
           </button>
         </div>
+
+        <AnimatePresence mode="wait">
+          {isMobileMenuOpen && (
+            <motion.div
+              key="mobile-menu"
+              ref={mobileMenuRef}
+              className="absolute top-full left-0 right-0 bg-black p-4 md:hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <nav className="flex flex-col text-center space-y-4">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <NavLink
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navItems.length * 0.1 }}
+                >
+                  <button
+                    onClick={() => {
+                      toggleLanguage();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="px-4 py-2 text-sm font-medium text-white bg-transparent border border-white rounded-md hover:bg-white hover:text-black transition-colors"
+                  >
+                    {language === "en" ? "العربية" : "English"}
+                  </button>
+                </motion.div>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* Overlay for Mobile Menu */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
-          onClick={() => setIsOpen(false)}
-        ></div>
-      )}
     </header>
-  );
-}
-
-// NavLink component with hover effect
-function NavLink({ href, children, ...props }) {
-  return (
-    <Link
-      href={href}
-      className="text-white hover:text-white/80 transition-colors duration-200 text-lg"
-      {...props}
-    >
-      {children}
-    </Link>
   );
 }

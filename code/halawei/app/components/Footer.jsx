@@ -73,11 +73,11 @@ export default function Footer({ language = "en" }) {
           <ul className="space-y-2">
             <li className="flex items-center justify-center md:justify-start space-x-2">
               <Phone className="w-5 h-5" />
-              <span>+974 55570274</span>
+              <span>+974 70700575</span>
             </li>
             <li className="flex items-center justify-center md:justify-start space-x-2">
               <Mail className="w-5 h-5" />
-              <span>info@alhalawei.com</span>
+              <span>info@alhalaweitrading.com</span>
             </li>
             <li className="flex items-center justify-center md:justify-start space-x-2">
               <MapPin className="w-5 h-5" />

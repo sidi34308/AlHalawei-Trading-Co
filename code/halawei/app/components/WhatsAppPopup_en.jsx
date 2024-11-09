@@ -1,56 +1,70 @@
-import { useState, useEffect } from "react";
-import { X } from "lucide-react"; // Import close icon
-import { FaWhatsapp } from "react-icons/fa"; // Import WhatsApp icon
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaWhatsapp, FaTimes } from "react-icons/fa"; // Import FaTimes for the close icon
 
-export default function WhatsAppPopup() {
-  const [isVisible, setIsVisible] = useState(false);
+export default function WhatsAppPopup_en() {
+  const [isVisible, setIsVisible] = useState(true); // Start as visible
+  const [isMinimized, setIsMinimized] = useState(false);
 
-  useEffect(() => {
-    // Show the popup after the page loads
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 800); // Delay for 800ms
+  // Minimize popup
+  const handleMinimize = () => {
+    setIsMinimized(true);
+  };
 
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []);
+  // Restore the popup
+  const handleRestore = () => {
+    setIsMinimized(false);
+  };
 
-  const handleClose = () => {
-    // Hide with exit animation
+  // Hide the popup
+  const handleHide = () => {
     setIsVisible(false);
   };
 
   return (
-    isVisible && (
-      <div
-        className={`fixed bottom-6 left-6 bg-green-600 z-20 text-white p-6 rounded-lg shadow-lg transform transition-all duration-700 ease-in-out ${
-          isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        }`}
-      >
-        <div className="flex justify-between items-center mb-2">
-          <p className="text-lg font-semibold flex items-center">
-            <FaWhatsapp className="w-6 h-6 mr-2" /> {/* WhatsApp icon */}
-            <strong>Contact us via WhatsApp</strong>
-          </p>
-          <button
-            onClick={handleClose}
-            aria-label="Close"
-            className="ml-2 hover:text-gray-300 transition-colors"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        <p className="mt-2">
-          For any inquiries, click here for direct communication.
-        </p>
-        <a
-          href="https://wa.me/0097455570274" // Replace with your WhatsApp number
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-4 px-4 py-2 bg-white text-green-600 font-bold rounded-lg shadow hover:bg-gray-200 transition-colors duration-300"
+    <div className="fixed bottom-6 right-6 z-50">
+      {/* Full-size Popup */}
+      {isVisible && !isMinimized && (
+        <motion.div
+          className="bg-green-500 text-white p-4 rounded-lg w-full shadow-lg w-64 max-w-xs"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.3 }}
         >
-          Contact Now
-        </a>
-      </div>
-    )
+          <div className="flex justify-between items-center font-semibold text-lg p-1">
+            <span>Would you like to get in touch via WhatsApp?</span>
+            <button
+              onClick={handleMinimize}
+              className="text-white hover:text-gray-300 border-none nonee"
+            >
+              <FaTimes className="text-white mx-2" /> {/* Close icon */}
+            </button>
+          </div>
+          <a
+            href="https://wa.me/97470700575"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block bg-white text-green-500 px-4 py-2 rounded-full"
+          >
+            <FaWhatsapp className="inline-block mr-2 text-green-500 " />
+            Chat Now
+          </a>
+        </motion.div>
+      )}
+
+      {/* Minimized version (WhatsApp icon) */}
+      {isVisible && isMinimized && (
+        <motion.div
+          className="flex justify-center items-center bg-green-500 text-white w-16 h-16 rounded-full cursor-pointer"
+          onClick={handleRestore}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FaWhatsapp className="text-2xl" />
+        </motion.div>
+      )}
+    </div>
   );
 }
