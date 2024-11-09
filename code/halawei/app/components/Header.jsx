@@ -7,12 +7,19 @@ import Image from "next/image";
 export default function Header({ language = "en" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
-  // Detect scroll to add background color
+  // Track scroll direction and hide/show header
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10);
+      setIsHidden(currentScrollY > lastScrollY && currentScrollY > 50);
+      lastScrollY = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -41,9 +48,9 @@ export default function Header({ language = "en" }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-colors duration-300 p-4 px-9 sm:px-40 z-50 ${
+      className={`fixed top-0 left-0 right-0 transition-transform duration-300 p-4 px-9 sm:px-40 z-50 ${
         isScrolled ? "bg-black" : "bg-transparent"
-      }`}
+      } ${isHidden ? "-translate-y-full" : "translate-y-0"}`}
       style={{ direction: "ltr" }}
     >
       <div className="container mx-auto flex justify-between items-center">

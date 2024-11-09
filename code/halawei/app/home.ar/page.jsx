@@ -13,11 +13,12 @@ export default function Home() {
       <Header language="ar" />
       <main className="flex-grow">
         <WhatsAppPopup />
+
         {/* Hero Section with Background Video */}
         <section className="relative flex justify-center items-center flex-col h-screen text-white text-center py-20">
           <video
             className="absolute top-0 left-0 w-full h-full object-cover"
-            src="/background.mp4" // Replace with the path to your video file
+            src="/background.mp4"
             autoPlay
             loop
             muted
@@ -48,12 +49,142 @@ export default function Home() {
         </section>
 
         {/* Services Section */}
+
+        <section className="flex flex-col md:flex-row w-full bg-[#f4f4f4] items-center  mb-12">
+          <div className="md:w-1/2 p-8 md:px-20 text-center md:text-right">
+            <h3 className="text-8xl font-bold text-primary mb-8">
+              لحوم طازجة بجودة مضمونة
+            </h3>
+            <p className="text-xl leading-relaxed">
+              اكتشف أجود أنواع اللحوم الطازجة المتوفرة لدينا لتلبية جميع
+              احتياجاتك. نحن نقدم لعملائنا اللحوم التي تتميز بالجودة العالية
+              والنكهة الأصيلة لضمان تجربة طعام مميزة.
+            </p>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            <img
+              src="/all.png"
+              alt="Products"
+              className="max-w-full w-auto h-auto "
+            />
+          </div>
+        </section>
+
+        {/* High-Quality Meat Products Section */}
+        <section className=" mx-auto py-16 px-9 sm: text-center">
+          <div className="flex flex-col md:flex-row w-full items-center my-40 bg-primary rounded-3xl">
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-right">
+              <h4 className="text-4xl mb-8 text-white font-bold">لحم الضأن</h4>
+              <p className="text-lg text-white leading-relaxed">
+                اكتشف أفضل أنواع لحم الضأن الحلال في قطر من شركة الحلاوي، مع
+                خيارات من مصادر محلية ومستورد يتم تجهيزها وفقاً لأعلى المعايير
+                الإسلامية. يتميز لحم الضأن من الحلاوي بجودته العالية التي تضفي
+                مذاقاً أصيلاً ومميزاً على الأطباق القطرية والعربية، مثل
+                "المكبوس" والمشويات. يتم الحصول على اللحم من مراعي موثوقة تلتزم
+                بمعايير الرفق بالحيوان والاستدامة، مما يضمن تجربة طهي لذيذة
+                وصحية.
+              </p>
+            </div>
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img1.png"
+                alt="Lamb Products"
+                className="max-w-full w-auto h-auto  rounded-3xl"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 rounded-3xl">
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img3.png"
+                alt="Cow Meat Products"
+                className="max-w-full w-auto h-auto rounded-3xl"
+              />
+            </div>
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-right">
+              <h4 className="text-4xl text-primary mb-8 font-bold">
+                لحم البقر
+              </h4>
+              <p className="text-lg leading-relaxed">
+                توفر شركة الحلاوي لحم البقر الفاخر في قطر، سواء كان محليًا أو
+                مستورداً، بانتقاء دقيق لأعلى جودة ونكهة استثنائية. تُعزز لحومنا
+                الأطباق اليومية ووجبات المناسبات، مما يجعلها خيارًا مثاليًا
+                للطهاة والمطاعم الذين يسعون لتقديم أفضل طعم وجودة لزبائنهم.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 bg-primary rounded-3xl">
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-right">
+              <h4 className="text-4xl mb-8  text-white font-bold">لحم الجمل</h4>
+              <p className="text-lg text-white leading-relaxed">
+                تتميز شركة الحلاوي بتوفير لحم الإبل عالي الجودة للمناسبات
+                القطرية التقليدية، مع ضمان الذبح الحلال والالتزام بأعلى معايير
+                الصحة والسلامة. يتم اختيار لحم الإبل بعناية لتلبية تفضيلات الطهي
+                القطرية، مما يجعله الخيار المثالي للأسر والمناسبات الخاصة.
+              </p>
+            </div>
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img2.png"
+                alt="Camel Meat Products"
+                className="max-w-full w-auto h-auto   rounded-3xl"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 rounded-3xl">
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img4.png"
+                alt=" Meat Products"
+                className="max-w-full w-auto h-auto rounded-3xl"
+              />
+            </div>
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-right">
+              <h4 className="text-4xl mb-8  text-primary font-bold">
+                المنتجات المجمدة
+              </h4>
+              <p className="text-lg  leading-relaxed">
+                الحلاوي تقدم مجموعة متنوعة من الأطعمة المجمدة عالية الجودة التي
+                تشمل الخضروات واللحوم والمأكولات البحرية. نحرص على تجميد
+                المنتجات في ذروة نضارتها للحفاظ على طعمها وقيمتها الغذائية، مما
+                يجعلها حلاً مريحًا وصحيًا للأسر والشركات على حد سواء.
+              </p>
+            </div>
+          </div>
+
+          {/* Add similar sections for other meat products as needed */}
+        </section>
+        <div className="flex flex-col  w-full items-center mb-20 rounded-3xl ">
+          <div className="w-full flex justify-center">
+            <img
+              src="/countries.png"
+              alt=" Meat Products"
+              className="max-w-full w-auto h-auto"
+            />
+          </div>
+          <div className="md:w-1/2 p-10 md:px-20 text-center md:text-right">
+            <h4 className="text-4xl mb-8  text-primary font-bold">
+              لحوم عالية الجودة من السودان، الصومال، الهند، وباكستان
+            </h4>
+            <p className="text-lg  leading-relaxed">
+              تفتخر شركة الحلاوي بتقديم مجموعة واسعة من اللحوم عالية الجودة
+              المستوردة من عدة دول مثل السودان، الصومال، الهند، وباكستان. نحرص
+              على اختيار اللحوم من مصادر موثوقة ووفقاً لأعلى معايير الجودة
+              والشروط الحلال، لتلبية احتياجات زبائننا الكرام. تضم مجموعتنا لحوم
+              الضأن، البقر، والدجاج التي تأتي من أفضل المراعي في هذه الدول، مما
+              يضمن طراوة ونكهة مميزة في كل وجبة.
+            </p>
+          </div>
+        </div>
         <section className="container min-h-screen mx-auto py-16 px-9 sm:px-40">
           <h3 className="text-3xl font-bold text-center mb-8 text-primary">
-            خدماتنا
+            خدماتنا كذلك تتضمن
           </h3>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Each service item with smooth hover effect */}
             {servicesData.map((service, index) => (
               <div
                 key={index}
@@ -67,9 +198,8 @@ export default function Home() {
             ))}
           </div>
         </section>
-
         {/* Why Choose Us Section */}
-        <section className="bg-primary min-h-screen py-16 px-9 sm:px-40 text-center">
+        <section className="bg-primary py-16 px-9 sm:px-40 text-center">
           <h3 className="text-3xl font-bold text-white mb-8">لماذا تختارنا؟</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 border rounded-lg shadow hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2">
@@ -104,10 +234,7 @@ const servicesData = [
     title: "التجارة في العصائر",
     description: "نقدم عصائر طازجة ومجمدة لتلبية احتياجات العملاء المتنوعة.",
   },
-  {
-    title: "التجارة في اللحوم",
-    description: "تجارة اللحوم الطازجة والمبردة بأعلى معايير الجودة.",
-  },
+
   {
     title: "منتجات الألبان",
     description: "توفر منتجات ألبان متنوعة وصحية للأسواق المحلية.",

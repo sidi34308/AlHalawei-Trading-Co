@@ -46,6 +46,144 @@ export default function Home() {
             quality.
           </p>
         </section>
+        {/* Services Section */}
+
+        <section className="flex flex-col md:flex-row w-full bg-[#f4f4f4] items-center  mb-12">
+          <div className="md:w-1/2 p-8 md  :px-20 text-center md:text-left">
+            <h3 className="text-5xl font-bold text-primary sm:text-8xl mb-8">
+              Fresh Meat with Guaranteed Quality
+            </h3>
+            <p className="sm:text-xl leading-relaxed">
+              Discover the finest types of fresh meat available to meet all your
+              needs. We provide our customers with meat that is distinguished by
+              its high quality and authentic flavor, ensuring a unique dining
+              experience.
+            </p>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            <img
+              src="/all2.png"
+              alt="Products"
+              className="max-w-full w-auto h-auto "
+            />
+          </div>
+        </section>
+
+        {/* High-Quality Meat Products Section */}
+        <section className=" mx-auto py-16 px-9 sm: text-center">
+          <div className="flex flex-col md:flex-row w-full items-center my-40 bg-primary rounded-3xl">
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-left">
+              <h4 className="text-4xl mb-8 text-white font-bold">Lamb</h4>
+              <p className="text-lg text-white leading-relaxed">
+                Discover the best halal lamb in Qatar from Al-Halawi, with
+                options from local and imported sources, prepared according to
+                the highest Islamic standards. Al-Halawi lamb is known for its
+                high quality, offering an authentic and unique flavor to Qatari
+                and Arab dishes such as "Maqboos" and grilled meats. The meat
+                comes from trusted pastures that adhere to animal welfare and
+                sustainability standards, ensuring a delicious and healthy
+                cooking experience.
+              </p>
+            </div>
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img1.png"
+                alt="Lamb Products"
+                className="max-w-full w-auto h-auto  rounded-3xl"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 rounded-3xl">
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img3.png"
+                alt="Cow Meat Products"
+                className="max-w-full w-auto h-auto rounded-3xl"
+              />
+            </div>
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-left">
+              <h4 className="text-4xl text-primary mb-8 font-bold">Beef</h4>
+              <p className="text-lg leading-relaxed">
+                Al-Halawi offers premium beef in Qatar, whether local or
+                imported, selected for the highest quality and exceptional
+                flavor. Our beef enhances daily dishes and special occasion
+                meals, making it the ideal choice for chefs and restaurants
+                seeking to provide the best taste and quality to their
+                customers.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 bg-primary rounded-3xl">
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-left">
+              <h4 className="text-4xl mb-8  text-white font-bold">
+                Camel Meat
+              </h4>
+              <p className="text-lg text-white leading-relaxed">
+                Al-Halawi offers high-quality camel meat for traditional Qatari
+                events, ensuring halal slaughter and adhering to the highest
+                health and safety standards. Camel meat is carefully selected to
+                meet Qatari cooking preferences, making it the perfect choice
+                for families and special occasions.
+              </p>
+            </div>
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img2.png"
+                alt="Camel Meat Products"
+                className="max-w-full w-auto h-auto   rounded-3xl"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center my-40 rounded-3xl">
+            <div className="md:w-1/2 flex justify-center">
+              <img
+                src="/img4.png"
+                alt=" Meat Products"
+                className="max-w-full w-auto h-auto rounded-3xl"
+              />
+            </div>
+            <div className="md:w-1/2 p-8 md:px-20 text-center md:text-left">
+              <h4 className="text-4xl mb-8  text-primary font-bold">
+                Frozen Products
+              </h4>
+              <p className="text-lg  leading-relaxed">
+                Al-Halawi offers a wide variety of high-quality frozen foods,
+                including vegetables, meats, and seafood. We ensure that our
+                products are frozen at their peak freshness to preserve their
+                taste and nutritional value, making them a convenient and
+                healthy solution for both families and businesses.
+              </p>
+            </div>
+          </div>
+
+          {/* Add similar sections for other meat products as needed */}
+        </section>
+        <div className="flex flex-col  w-full items-center mb-20 rounded-3xl ">
+          <div className="w-full flex justify-center">
+            <img
+              src="/countries.png"
+              alt=" Meat Products"
+              className="max-w-full w-auto h-auto"
+            />
+          </div>
+          <div className="md:w-1/2 p-10 md:px-20 text-center md:text-left">
+            <h4 className="text-4xl mb-8  text-primary font-bold">
+              High-Quality Meat from Sudan, Somalia, India, and Pakistan
+            </h4>
+            <p className="text-lg  leading-relaxed">
+              Al-Halawi is proud to offer a wide range of high-quality meats
+              imported from countries such as Sudan, Somalia, India, and
+              Pakistan. We ensure the meat is selected from trusted sources and
+              adheres to the highest quality standards and halal requirements,
+              meeting the needs of our valued customers. Our collection includes
+              lamb, beef, and chicken from the best pastures in these countries,
+              ensuring tenderness and a unique flavor in every meal.
+            </p>
+          </div>
+        </div>
 
         {/* Services Section */}
         <section className="container min-h-screen mx-auto py-16 px-9 sm:px-40">
