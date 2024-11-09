@@ -79,10 +79,10 @@ export default function Home() {
                 options from local and imported sources, prepared according to
                 the highest Islamic standards. Al-Halawi lamb is known for its
                 high quality, offering an authentic and unique flavor to Qatari
-                and Arab dishes such as "Maqboos" and grilled meats. The meat
-                comes from trusted pastures that adhere to animal welfare and
-                sustainability standards, ensuring a delicious and healthy
-                cooking experience.
+                and Arab dishes such as &quot;Maqboos&quot; and grilled meats.
+                The meat comes from trusted pastures that adhere to animal
+                welfare and sustainability standards, ensuring a delicious and
+                healthy cooking experience.
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center">
