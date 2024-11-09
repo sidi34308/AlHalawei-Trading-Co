@@ -85,7 +85,7 @@ export default function Header({ language = "en" }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-300 px-40 py-4 z-50 ${
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 px-10 sm:px-40 py-4 z-50 ${
         isScrolled
           ? "bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/85"
           : "bg-transparent"
